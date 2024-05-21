@@ -1,0 +1,109 @@
+ .overlay {
+     position: fixed;
+     width: 100%;
+     height: 100%;
+     left: 0;
+     top: 0;
+     background-color: rgba(0, 0, 0, .5);
+     z-index: 1;
+
+     .drawer {
+         display: flex;
+         flex-direction: column;
+         flex: 1;
+         position: fixed;
+         width: 420px;
+         height: 100%;
+         right: 0;
+         top: 0;
+         padding: 30px;
+         background-color: #ffffff;
+         box-shadow: -10px 4px 24px rgba(0, 0, 0, .1);
+
+         .drawer_h2 {
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+             margin-bottom: 30px;
+
+             img {
+                 &:hover {
+                     cursor: pointer;
+                     box-shadow: 0 10px 20px rgba(0, 0, 0, .04);
+                     transition: box-shadow .2s ease-in-out;
+                 }
+             }
+         }
+
+     }
+
+     .drawer_items {
+         overflow: auto;
+
+         .drawer_items_ul {
+             .drawer_items_ul_li {
+
+                 display: flex;
+                 align-items: flex-end;
+                 margin-bottom: 20px;
+
+                 .drawer_items_ul_li_span {}
+
+                 .drawer_items_ul_li_div {
+                     flex: 1;
+                     position: relative;
+                     margin: 0 5px;
+                     top: -4px;
+
+                     height: 1px;
+                     border-bottom: 1px dashed #dfdfdf;
+                 }
+
+                 .drawer_items_ul_li_b {}
+             }
+         }
+
+         .takeOrderButton {
+             cursor: pointer;
+             position: relative;
+             width: 100%;
+             height: 55px;
+             margin-top: 15px;
+             border: none;
+             border-radius: 18px;
+             background-color: #9dd558;
+             color: white;
+             font-size: 16px;
+             font-weight: 650;
+             transition: background .15s ease-in-out;
+
+             &:hover {
+                 background-color: lighten($color: #9dd558, $amount: 5%);
+             }
+
+             &:active {
+                 background: darken($color: #9dd558, $amount: 5%);
+             }
+
+
+
+             .takeOrderArrow {
+
+                 position: absolute;
+                 right: 30px;
+                 //  top: 20px;
+                 transition: transform .2s ease-in-out;
+                 top: 22px;
+
+             }
+
+             &:hover {
+                 .takeOrderArrow {
+                     transform: translateX(5px);
+                 }
+
+             }
+
+         }
+     }
+ }

@@ -1,0 +1,98 @@
+ * {
+   font-family: system-ui, 'Inter';
+ }
+
+ body {
+   margin: 0;
+   font-family: system-ui, 'Inter';
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+   background-color: rgba(229, 219, 250, .638);
+ }
+
+ //////////////////////////////////////////  Глобальный класс для кнопки //////////////////////////////
+ .takeOrderButton {
+   cursor: pointer;
+   width: 100%;
+   height: 55px;
+   margin-top: 15px;
+   border: none;
+   border-radius: 18px;
+   background-color: #9dd558;
+   color: white;
+   font-size: 16px;
+   font-weight: 650;
+   transition: background .15s ease-in-out;
+
+   &:hover {
+     background-color: lighten($color: #9dd558, $amount: 5%);
+   }
+
+   &:active {
+     background: darken($color: #9dd558, $amount: 5%);
+   }
+ }
+
+ /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ .wrapper {
+   background-color: white;
+   box-shadow: 0 10px 20px rgba(0, 0, 0, .04);
+   border-radius: 20px;
+   max-width: 1080px;
+   margin: 50px auto;
+   padding: 40px;
+
+
+
+   .cartItem {
+     display: flex;
+     align-items: center;
+     border: 1px solid #f3f3f3;
+     border-radius: 20px;
+     overflow: hidden;
+     padding: 20px;
+     margin-bottom: 20px;
+
+
+
+     &:hover {
+       cursor: pointer;
+       box-shadow: 0 10px 20px rgba(0, 0, 0, .04);
+       transition: box-shadow .2s ease-in-out;
+     }
+
+     .sneakersCart {
+       width: 70px;
+       height: 70px;
+       background-repeat: no-repeat;
+       background-position: 0 10px;
+       background-size: contain;
+       margin-right: 20px;
+
+     }
+
+     p {
+       font-size: 16px;
+       margin: 0;
+     }
+
+     b {
+       font-size: 14px;
+     }
+
+     .sneakers_cartname {
+       margin-right: 20px;
+     }
+
+     .removeBtn {
+       opacity: .5;
+       transition: opacity .15s ease-in-out;
+       cursor: pointer;
+
+       &:hover {
+         opacity: 1;
+       }
+     }
+   }
+ }

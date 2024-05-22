@@ -12,14 +12,15 @@ export default function Home({
   isLoading,
 }) {
   const renderItems = () => {
-    const filteredItems = items.filter((item) =>
+    const filterItems = items.filter((item) =>
       item.name.toLowerCase().includes(searchValue.toLowerCase())
     );
-    return (isLoading ? [...Array(10)] : filteredItems).map((item, index) => (
+
+    return (isLoading ? [...Array(10)] : filterItems).map((item, index) => (
       <Card
         key={index}
-        onPlus={(obj) => onAddToCart(obj)}
         onFavorite={(obj) => onAddToFavorite(obj)}
+        onPlus={(obj) => onAddToCart(obj)}
         added={cartItems.some((obj) => Number(obj.id) === Number(item.id))}
         loading={isLoading}
         {...item}

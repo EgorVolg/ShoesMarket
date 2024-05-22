@@ -9,7 +9,24 @@ export default function Home({
   onAddToCart,
   onAddToFavorite,
   cartItems,
+  isLoading,
 }) {
+  const renderItems = () => {
+    const filteredItems = items.filter((item) =>
+      item.name.toLowerCase().includes(searchValue.toLowerCase())
+    );
+    return (isLoading ? [...Array(10)] : filteredItems).map((item, index) => (
+      <Card
+        key={index}
+        onPlus={(obj) => onAddToCart(obj)}
+        onFavorite={(obj) => onAddToFavorite(obj)}
+        added={cartItems.some((obj) => Number(obj.id) === Number(item.id))}
+        loading={isLoading}
+        {...item}
+      />
+    ));
+  };
+
   return (
     <div className={styles.content}>
       <div className={styles.search_block}>
@@ -25,24 +42,7 @@ export default function Home({
           />
         </div>
       </div>
-      <div className={styles.content_items}>
-        {items
-          .filter((item) =>
-            item.name.toLowerCase().includes(searchValue.toLowerCase())
-          )
-          .map((item) => (
-            <Card
-              key={item.imageUrl}
-              onPlus={(obj) => onAddToCart(obj)}
-              onFavorite={(obj) => onAddToFavorite(obj)}
-              added={cartItems.some(
-                (obj) => Number(obj.id) === Number(item.id)
-              )}
-              loading={false}
-              {...item}
-            />
-          ))}
-      </div>
+      <div className={styles.content_items}>{renderItems()}</div>
     </div>
   );
 }

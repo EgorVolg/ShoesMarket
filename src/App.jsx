@@ -13,9 +13,11 @@ export default function App() {
   const [favoriteItems, setFavoriteItems] = useState([]);
   const [cartOpened, setCartOpened] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect( () => {
+  useEffect(() => {
     async function fetchData() {
+      setIsLoading(true);
       //............................................... Корзина ...............................................
       const drawerResponce = await axios.get(
         "https://85756798b179ce34.mokky.dev/drawer"
@@ -30,12 +32,12 @@ export default function App() {
       const itemsResponce = await axios.get(
         "https://85756798b179ce34.mokky.dev/sneakers"
       );
-
+      setIsLoading(false);
       setCartItems(drawerResponce.data);
       setFavoriteItems(favResponce.data);
       setItems(itemsResponce.data);
     }
-    fetchData()
+    fetchData();
   }, []);
   //............................................... Добавление в избранное ..............................................
   const onAddToFavorite = async (obj) => {
@@ -50,7 +52,6 @@ export default function App() {
         setFavoriteItems((prev) => [...prev, data]);
       }
     } catch (error) {
-      alert("Не удалось отправить на бэк");
       console.log(error);
     }
   };
@@ -99,6 +100,7 @@ export default function App() {
               onAddToCart={onAddToCart}
               onAddToFavorite={onAddToFavorite}
               cartItems={cartItems}
+              isLoading={!isLoading}
             />
           }
         />

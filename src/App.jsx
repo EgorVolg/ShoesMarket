@@ -14,23 +14,29 @@ export default function App() {
   const [cartOpened, setCartOpened] = useState(false);
   const [searchValue, setSearchValue] = useState("");
 
-  useEffect(() => {
-    //............................................... Кроссовки ...............................................
-    axios.get("https://85756798b179ce34.mokky.dev/sneakers").then((res) => {
-      setItems(res.data);
-    });
+  useEffect( () => {
+    async function fetchData() {
+      //............................................... Корзина ...............................................
+      const drawerResponce = await axios.get(
+        "https://85756798b179ce34.mokky.dev/drawer"
+      );
 
-    //............................................... Корзина ...............................................
-    axios.get("https://85756798b179ce34.mokky.dev/drawer").then((res) => {
-      setCartItems(res.data);
-    });
+      //............................................... Избранное ...............................................
+      const favResponce = await axios.get(
+        "https://85756798b179ce34.mokky.dev/favorites"
+      );
 
-    //............................................... Избранное ...............................................
-    axios.get("https://85756798b179ce34.mokky.dev/favorites").then((res) => {
-      setFavoriteItems(res.data);
-    });
+      //............................................... Кроссовки ...............................................
+      const itemsResponce = await axios.get(
+        "https://85756798b179ce34.mokky.dev/sneakers"
+      );
+
+      setCartItems(drawerResponce.data);
+      setFavoriteItems(favResponce.data);
+      setItems(itemsResponce.data);
+    }
+    fetchData()
   }, []);
-
   //............................................... Добавление в избранное ..............................................
   const onAddToFavorite = async (obj) => {
     try {
@@ -58,8 +64,10 @@ export default function App() {
 
   //............................................... Добавление в корзину ...............................................
   const onAddToCart = (obj) => {
-    if (cartItems.find((item) => item.id === obj.id)) {
-      setCartItems((prev) => prev.filter((item) => item.id !== obj.id));
+    if (cartItems.find((item) => Number(item.id) === Number(obj.id))) {
+      setCartItems((prev) =>
+        prev.filter((item) => Number(item.id) !== Number(obj.id))
+      );
     } else {
       axios.post("https://85756798b179ce34.mokky.dev/drawer", obj);
       setCartItems((prev) => [...prev, obj]);
@@ -68,7 +76,6 @@ export default function App() {
 
   //............................................... Удаление из корзины ...............................................
   const onRemoveItem = (id) => {
-    axios.delete(`https://85756798b179ce34.mokky.dev/drawer/${id}`);
     setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
@@ -91,6 +98,7 @@ export default function App() {
               onChangeSearchInput={onChangeSearchInput}
               onAddToCart={onAddToCart}
               onAddToFavorite={onAddToFavorite}
+              cartItems={cartItems}
             />
           }
         />

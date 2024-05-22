@@ -17,13 +17,12 @@ function Drawer({ onClickClosed, items = [], onRemoveItem }) {
 
         {items.length > 0 ? (
           <div className={styles.drawer_items}>
-            {items.map((el) => (
-              <div className="cartItem">
+            {items.map((el, index) => (
+              <div key={index} className="cartItem">
                 <div
                   className="sneakersCart"
                   style={{ backgroundImage: `url(${el.imageUrl})` }}
-                >
-                </div>
+                ></div>
                 <div className="sneakers_cartname">
                   <p>{el.name}</p>
                   <b>{el.price} руб.</b>

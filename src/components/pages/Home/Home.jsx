@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Home.module.scss";
-import { Card } from '../Card/Card';
+import { Card } from "../Card/Card";
 
 export default function Home({
   searchValue,
@@ -8,6 +8,7 @@ export default function Home({
   items,
   onAddToCart,
   onAddToFavorite,
+  cartItems,
 }) {
   return (
     <div className={styles.content}>
@@ -34,6 +35,10 @@ export default function Home({
               key={item.imageUrl}
               onPlus={(obj) => onAddToCart(obj)}
               onFavorite={(obj) => onAddToFavorite(obj)}
+              added={cartItems.some(
+                (obj) => Number(obj.id) === Number(item.id)
+              )}
+              loading={false}
               {...item}
             />
           ))}
